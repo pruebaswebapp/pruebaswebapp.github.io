@@ -1,0 +1,44 @@
+{
+"name": "Cáritas Texcoco",
+"short_name": "Cáritas Texcoco",
+"teme_color": "#ffe88a",
+"backgroud_color": "#ffe88a",
+"display": "standalone",
+"orientation": "portrait",
+"scope": "./",
+"id": "./index.html",
+"start_url": "./?utm_source=web_app_manifest",
+"icons": [
+
+{  
+
+	"src": "/logo192.png",
+	"type": "image/png",
+	"sizes": "192x192",
+    "purpose": "any maskable"
+
+},
+{  
+
+	"src": "/logo512.png",
+	"type": "image/png",
+	"sizes": "512x512",
+    "purpose": "maskable"
+
+},
+{  
+
+	"src": "/iphone.png",
+	"type": "image/png",
+	"sizes": "180x180",
+    "purpose": "maskable"
+
+}
+
+
+
+]
+
+
+
+}
