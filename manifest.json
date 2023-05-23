@@ -12,7 +12,7 @@
 
 {  
 
-	"src": "/Jesus192.png",
+	"src": "/Alegra192.png",
 	"type": "image/png",
 	"sizes": "192x192",
     "purpose": "any maskable"
@@ -20,7 +20,7 @@
 },
 {  
 
-	"src": "/Jesus512.png",
+	"src": "/Alegra512.png",
 	"type": "image/png",
 	"sizes": "512x512",
     "purpose": "maskable"
@@ -28,7 +28,7 @@
 },
 {  
 
-	"src": "/Jesus180.png",
+	"src": "/Alegra180.png",
 	"type": "image/png",
 	"sizes": "180x180",
     "purpose": "maskable"
