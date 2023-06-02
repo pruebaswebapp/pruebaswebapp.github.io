@@ -133,7 +133,27 @@ function mostrarNotifiacion(){
 
 }
 
+function autorizarNotificacion(){
 
+    Push.Permission.request(onGranted, onDenied);
+
+}
+
+
+
+function onGranted(){
+
+    $("#autorizarNotificacion").css("background-color", "green");
+
+}
+
+
+
+function onDenied(){
+
+    $("#autorizarNotificacion").css("background-color", "red");
+
+}
 
 
 </script>
