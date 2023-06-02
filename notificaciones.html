@@ -71,8 +71,12 @@
           <h1 class="alin"></h1>
 	    </br>
 
+
+<button id="autorizarNotificacion">Autorizar notificaciones</button>
+<button id="mostrarNotificacion">Mostrar notificaciones</button>
+
     
-<iframe src="https://es.catholic.net/op/articulos/82254/amarte-por-ser-tu.html" style="width:100%; height:600px; border:0;"></iframe>
+<iframe src="" style="width:100%; height:600px; border:0;"></iframe>
       </br>
 
 
@@ -90,22 +94,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script type="text/javascript" src="js/push.min.js"></script>
 
 
 <script>
 
-Push.create('Hi there!', {
-    body: 'This is a notification.',
-    icon: 'icon.png',
-    timeout: 8000,               // Timeout before notification closes automatically.
-    vibrate: [100, 100, 100],    // An array of vibration pulses for mobile devices.
-    onClick: function() {
-        // Callback for when the notification is clicked. 
-        console.log(this);
-    }  
+    $(document).ready(function(){
+
+    $("#autorizarNotificacion").on("click", function(){
+
+        autorizarNotificacion();
+
+    });
+
+    $("#mostrarNotificacion").on("click", function(){
+
+        mostrarNotifiacion();
+
+    });
+
 });
+
+
+
+function mostrarNotifiacion(){
+
+        Push.create("Hola mundo",{
+            body: "Este es el cuerpo de la notificacion",
+            icon: "img/logo.png",
+            timeout: 4000,
+            onClick: function () {
+                window.focus();
+                this.close();
+        }
+    });
+
+}
+
+
 
 
 </script>
