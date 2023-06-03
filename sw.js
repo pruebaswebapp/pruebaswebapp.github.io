@@ -30,6 +30,10 @@ e.waitUntil(
   )
 );
 */
+
+console.log("INSTALADO");
+
+
 });
 
 self.addEventListener("fetch", (e) => {
