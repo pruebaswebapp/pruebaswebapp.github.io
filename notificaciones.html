@@ -79,6 +79,20 @@
 <iframe src="" style="width:100%; height:600px; border:0;"></iframe>
       </br>
 
+      <div class="contenedor">
+        <div class="t">Hora:</div>
+        <div class="timeis" id="tm"></div>
+      </div>
+      <div class="desperta">
+        DESPERTADOR:<br/><br/> hora: <input type="text" id="hora"> minuto: <input type="text" id="minuto">
+        <button>OK!</button>
+      </div>
+      
+      <a href="https://www.google.com.br/?#q=como+desactivar+bloqueo+ventana+emergente+navegadores" target:"_blank" class="obs">(*) - Hay que desactivar bloqueo de ventanas emergentes (pop-ups)</a>
+
+
+
+
 
       </div>
 
@@ -157,7 +171,72 @@ function onDenied(){
 }
 
 
+
+
+
+
+
+
+
+
+function reloj() {
+  var hoy = new Date();
+  var hora = hoy.getHours();
+  var minuto = hoy.getMinutes();
+  var segundo = hoy.getSeconds();
+  var horaD = parseInt(document.getElementById("hora").value);
+  var minutoD = parseInt(document.getElementById("minuto").value);
+
+  if (minuto < 10) {
+    minuto = "0" + minuto
+  };
+  if (segundo < 10) {
+    segundo = "0" + segundo
+  };
+  if (hora == horaD && minuto == minutoD && segundo == 00) {
+    window.open("https://www.youtube.com/watch?v=MC64gKvh5R8&t=1s&autoplay=1");
+    
+  };
+
+  var tm = document.getElementById("tm");
+  tm.textContent = (hora + ":" + minuto + ":" + segundo);
+
+};
+
+setInterval(reloj, 1000);
+
+
+// modos de abrir página fullscreen
+// https://www.w3schools.com/jsref/met_win_open.asp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
+
+
 
 
   </body>  
