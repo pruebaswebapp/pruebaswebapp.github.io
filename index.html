@@ -27,6 +27,14 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+
+
+function requestPermission() {
+  console.log('Requesting permission...');
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+	
 </script>
 
 
@@ -923,13 +931,8 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 	  
     </script>
 
-<script>
-function requestPermission() {
-  console.log('Requesting permission...');
-  Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('Notification permission granted.');
- </script>
+
+
 
 </body>
 </html>
