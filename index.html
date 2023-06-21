@@ -28,13 +28,19 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
+	  var messaging = firebase.messaging();
 
-function requestPermission() {
-  console.log('Requesting permission...');
-  Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('Notification permission granted.');
-	
+
+	  messaging.requestPermission()
+  .then(function() {
+    console.log('Se han aceptado las notificaciones');
+  })
+  .catch(function(err) {
+    mensajeFeedback(err);
+    console.log('No se ha recibido permiso / token: ', err);
+  });
+
+
 </script>
 
 
