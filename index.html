@@ -9,15 +9,24 @@
 
 
 
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
-<script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "165b70ce-d4a4-4244-9e56-49751fcd6cf3",
-    });
-  });
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDgTmXO5zCmnHDFlsELnUrX5jdts8voNLY",
+    authDomain: "pruebaspush-6ebab.firebaseapp.com",
+    projectId: "pruebaspush-6ebab",
+    storageBucket: "pruebaspush-6ebab.appspot.com",
+    messagingSenderId: "72464999288",
+    appId: "1:72464999288:web:13951aa3daa273baaa5e8d"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
 </script>
 
 
@@ -914,9 +923,13 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 	  
     </script>
 
-
-
-
+<script>
+function requestPermission() {
+  console.log('Requesting permission...');
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+ </script>
 
 </body>
 </html>
