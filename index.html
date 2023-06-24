@@ -15,6 +15,8 @@
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
+  import { getMesingsag } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging.js"
+
   // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyDgTmXO5zCmnHDFlsELnUrX5jdts8voNLY",
@@ -26,16 +28,10 @@
   };
 
   
-
-
-</script>
-
-<script>
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const messaging = getMessaging(app);
+const messaging = getMesingsag(app);
 
 	messaging.requestPermission()
 .then(function() {
@@ -46,7 +42,10 @@ const messaging = getMessaging(app);
   console.log('No se ha recibido permiso / token: ', err);
 });
 
+
+
 </script>
+
 
 
 
