@@ -25,22 +25,30 @@
     appId: "1:72464999288:web:13951aa3daa273baaa5e8d"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-  const messaging = getMessaging(app);
-
-	  messaging.requestPermission()
-  .then(function() {
-    console.log('Se han aceptado las notificaciones');
-  })
-  .catch(function(err) {
-    mensajeFeedback(err);
-    console.log('No se ha recibido permiso / token: ', err);
-  });
+  
 
 
 </script>
+
+<script>
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const messaging = getMessaging(app);
+
+	messaging.requestPermission()
+.then(function() {
+  console.log('Se han aceptado las notificaciones');
+})
+.catch(function(err) {
+  mensajeFeedback(err);
+  console.log('No se ha recibido permiso / token: ', err);
+});
+
+</script>
+
+
 
 
 
