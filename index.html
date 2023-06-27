@@ -9,69 +9,6 @@
 
 
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  import { getMesingsag } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging.js"
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDgTmXO5zCmnHDFlsELnUrX5jdts8voNLY",
-    authDomain: "pruebaspush-6ebab.firebaseapp.com",
-    projectId: "pruebaspush-6ebab",
-    storageBucket: "pruebaspush-6ebab.appspot.com",
-    messagingSenderId: "72464999288",
-    appId: "1:72464999288:web:13951aa3daa273baaa5e8d"
-  };
-
-  
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-const messaging = getMesingsag(app);
-
-	messaging.requestPermission()
-.then(function() {
-  console.log('Se han aceptado las notificaciones');
-})
-.catch(function(err) {
-  mensajeFeedback(err);
-  console.log('No se ha recibido permiso / token: ', err);
-});
-
-
-Notification.requestPermission().then((permission) => {
-  if (permission === 'granted') {
-    console.log('Notification permission granted.');
-    // TODO(developer): Retrieve a registration token for use with FCM.
-    // ...
-  } else {
-    console.log('Unable to get permission to notify.');
-  }
-});
-
-function requestPermission() {
-  console.log('Requesting permission...');
-  Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('Notification permission granted.');
-    }
-  })}
-	
-	
-	
-	  
-</script>
-
-
-
-
-
-
-
 
 	
 <link rel='dns-prefetch' href='//s0.wp.com' />
@@ -232,9 +169,123 @@ var actionbardata = {"siteID":"219610288","siteURL":"http:\/\/alegra58.wordpress
 <meta name="msapplication-TileImage" content="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=157" />
 
 <body class="home blog logged-in admin-bar no-customize-support wp-custom-logo wp-embed-responsive customizer-styles-applied jetpack-reblog-enabled highlander-enabled highlander-light has-marketing-bar has-marketing-bar-theme-blank-canvas">
-		
 
 
+
+	
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        var api = "https://script.google.com/macros/s/AKfycbw-I67dHQaMX-qv27H2H3jXT2qGJ2ngnKGqIcMcnomU7HYvy4CGVNryEubEoiv9FuzM/exec";
+        var firebaseConfig = {};
+		var vapidKey = "";
+	    let messaging;        
+		if ('serviceWorker' in navigator) {
+            console.log("ingreso");
+            // SE OBTIENE LOS DATOS 
+            $.ajax({
+                url: api,
+                jsonp: "callback",
+                method: 'POST',
+                data: JSON.stringify({ op: "parametria"}),
+                async: true,
+                success: function (respuesta) {
+                    if (respuesta.status == '0') {
+                        firebaseConfig = respuesta.firebaseConfig;
+                        vapidKey = respuesta.vapidKey;
+                        console.log("Se consulto parametria correctamente");
+                        suscribirse_push();
+                    } else {
+                        alert("No se suscribio");
+                    }
+                }
+            });
+        } else {
+            console.log('Service Worker not supported')
+        }
+        
+        async function suscribirse_push() {
+            await firebase.initializeApp(firebaseConfig);
+            messaging = await firebase.messaging();
+            const serviceWorkerRegistration = await navigator.serviceWorker.register('/Notificacion/firebase-messaging-sw.js?config='+ encodeURIComponent(JSON.stringify(firebaseConfig)))
+//            const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js')
+			.catch((err) => { return console.log('[Service Worker] Registration Error:', err) })
+            console.log('[Service Worker] Registered. Scope:', serviceWorkerRegistration.scope);
+            await navigator.serviceWorker.ready;
+            await messaging.getToken({ vapidKey: vapidKey, serviceWorkerRegistration: serviceWorkerRegistration })
+                .then((currentToken) => {
+                    if (currentToken) {
+                        console.log('current token for client: ', currentToken);
+                        $.ajax({
+                            url: api,
+                            jsonp: "callback",
+                            method: 'POST',
+                            data: JSON.stringify({ op: "suscribirse", subscription: currentToken }),
+                            async: true,
+                            success: function (respuesta) {
+                                if (respuesta.status == '0') {
+                                    console.log("Se genero el token");
+                                } else {
+                                    alert("No se suscribio");
+                                }
+                            }
+                        });
+                        
+                    } else {
+                        console.log('No registration token available. Request permission to generate one.');
+                    }
+                }).catch((err) => {
+                    console.log('An error occurred while retrieving token. ', err);
+                });
+
+            await messaging.onMessage((payload) => {
+           	 console.log('[messaging.js...] Received  message ', payload);
+           	  const notification = payload.data;
+           	  console.log('titulo 3', notification.titulo);
+           	  console.log('mensaje 3', notification.mensaje);
+           	  console.log('imagen 3', notification.imagen);
+           	     if (!("Notification" in window)) {
+           	    	 alert("This browser does not support desktop notification");
+   	      		 }else if (Notification.permission === "granted") {
+	      			 var notificacion= new Notification(notification.titulo, {
+   		      	        body: notification.mensaje,
+   		      	        icon: notification.imagen
+   		      	    });
+	    	      	 notification.onclick=function(ev){
+   	  	      	    	ev.preventDefault();    
+   	  	      	    	window.open(payload.notificacion.click_action,'_blank');
+   	  	      		notificacion.close();
+   	  	      		}
+   	      		 }else if (Notification.permission !== 'denied') {
+   	      		    Notification.requestPermission(function (permission) {
+   	      		    	if(!('permission' in Notification)) {
+   	      		        Notification.permission = permission;
+   	      		      }
+   	      		      if (permission === "granted") {
+   	  	      		    var notificacion= new Notification(notification.titulo, {
+   			      	        body: notification.mensaje,
+   			      	        icon: notification.imagen
+   			      	    });
+   	  	      			notification.onclick=function(ev){
+   		  	      	    	ev.preventDefault();    
+   		  	      	    	window.open(payload.notificacion.click_action,'_blank');
+   		  	      		notificacion.close();
+   		  	      		}
+   	      		      }
+   	      		    });
+   	      		  } else {
+   	      			  alert("Permission is "+Notification.permission);
+   	      		  }
+           });
+        }
+    </script>
+
+
+
+
+
+	
 	<div class="wpcom-bubble action-bubble">
 		<div class="bubble-txt"></div>
 	</div>
@@ -317,6 +368,10 @@ var actionbardata = {"siteID":"219610288","siteURL":"http:\/\/alegra58.wordpress
 			}, { passive: true } );
 		})();
 	</script>
+
+
+
+
 	
 <div class="wp-site-blocks">
 <main class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
