@@ -208,10 +208,10 @@ var actionbardata = {"siteID":"219610288","siteURL":"http:\/\/alegra58.wordpress
         async function suscribirse_push() {
             await firebase.initializeApp(firebaseConfig);
             messaging = await firebase.messaging();
-            const serviceWorkerRegistration = await navigator.serviceWorker.register('/Notificacion/firebase-messaging-sw.js?config='+ encodeURIComponent(JSON.stringify(firebaseConfig)))
+            const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js?config='+ encodeURIComponent(JSON.stringify(firebaseConfig)))
 //            const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js')
 			.catch((err) => { return console.log('[Service Worker] Registration Error:', err) })
-            console.log('[Service Worker] Registered. Scope:', serviceWorkerRegistration.scope);
+            console.log('[Service Worker] Registered.Scope:', serviceWorkerRegistration.scope);
             await navigator.serviceWorker.ready;
             await messaging.getToken({ vapidKey: vapidKey, serviceWorkerRegistration: serviceWorkerRegistration })
                 .then((currentToken) => {
