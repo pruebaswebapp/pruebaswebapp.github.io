@@ -12,13 +12,21 @@ console.log("ingreso registrando mensaje 2");
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js...] Received background message ', payload);
   const notification = payload.data;
+
+  notification.titulo= "Alegra en SW";
+  notification.mensaje= "Manual";
+  notification.imagen= "https://mariavguadalupe.github.io/Alegra32.png";
+
   console.log('titulo 2', notification.titulo);
   console.log('mensaje 2', notification.mensaje);
   console.log('imagen 2', notification.imagen);
+
+  
+
   // Customize notification here
-	self.registration.showNotification("Alegra", {
-        body: "Construir el Reino de Dios",
-        icon: "https://mariavguadalupe.github.io/Alegra32.png"
+	self.registration.showNotification(notification.titulo, {
+        body: notification.mensaje,
+        icon: notification.imagen
     });      
 });
 
