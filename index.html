@@ -242,6 +242,13 @@ var actionbardata = {"siteID":"219610288","siteURL":"http:\/\/alegra58.wordpress
             await messaging.onMessage((payload) => {
            	 console.log('[messaging.js...] Received  message ', payload);
            	  const notification = payload.data;
+
+				 notification.titulo= "Alegra en HTML";
+  					notification.mensaje= "Manual 2";
+  					notification.imagen= "https://mariavguadalupe.github.io/Alegra512.png";
+
+
+
            	  console.log('titulo 3', notification.titulo);
            	  console.log('mensaje 3', notification.mensaje);
            	  console.log('imagen 3', notification.imagen);
