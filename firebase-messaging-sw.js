@@ -15,7 +15,7 @@ messaging.onBackgroundMessage((payload) => {
 
   notification.titulo= "Alegra en SW";
   notification.mensaje= "Manual";
-  notification.imagen= "https://mariavguadalupe.github.io/Alegra32.png";
+  notification.imagen= "https://mariavguadalupe.github.io/Alegra512.png";
 
   console.log('titulo 2', notification.titulo);
   console.log('mensaje 2', notification.mensaje);
