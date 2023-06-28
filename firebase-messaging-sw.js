@@ -16,9 +16,9 @@ messaging.onBackgroundMessage((payload) => {
   console.log('mensaje 2', notification.mensaje);
   console.log('imagen 2', notification.imagen);
   // Customize notification here
-	self.registration.showNotification(notification.titulo, {
-        body: "Service worker",
-        icon: notification.imagen
+	self.registration.showNotification("Alegra", {
+        body: "Construir el Reino de Dios",
+        icon: "https://mariavguadalupe.github.io/Alegra32.png"
     });      
 });
 
