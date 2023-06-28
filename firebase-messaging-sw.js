@@ -17,7 +17,7 @@ messaging.onBackgroundMessage((payload) => {
   console.log('imagen 2', notification.imagen);
   // Customize notification here
 	self.registration.showNotification(notification.titulo, {
-        body: notification.mensaje,
+        body: "Service worker",
         icon: notification.imagen
     });      
 });
