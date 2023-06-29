@@ -83,9 +83,9 @@ messaging.onBackgroundMessage((payload) => {
   //notification.mensaje= "Construye el Reino de Dios";
   //notification.imagen= "https://mariavguadalupe.github.io/Alegra512.png";
 
-  console.log('titulo 2', notification.title);
-  console.log('mensaje 2', notification.body);
-  console.log('imagen 2', notification.image);
+//  console.log('titulo 2', notification.title);
+ // console.log('mensaje 2', notification.body);
+  //console.log('imagen 2', notification.image);
 
   
 
