@@ -13,8 +13,8 @@ messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js...] Received background message ', payload);
   const notification = payload.data;
 
-  notification.titulo= "Alegra en SW";
-  notification.mensaje= "Manual";
+  notification.titulo= "Alegra";
+  notification.mensaje= "Construye el Reino de Dios";
   notification.imagen= "https://mariavguadalupe.github.io/Alegra512.png";
 
   console.log('titulo 2', notification.titulo);
