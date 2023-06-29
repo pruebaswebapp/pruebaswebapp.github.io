@@ -1,11 +1,11 @@
 
 // Instalar SW PWA
-
+/*
 const CACHE_NAME = "v1_cache_panel_adm",
 urlsToCache = [
     "./manifest.json",
 ];
-
+*/
 self.addEventListener("install", (e) => {
 /*e.waitUntil(
   caches
@@ -32,8 +32,8 @@ e.waitUntil(
   )
 );
 */
-alert("Hello! I am an alert box!!");
-console.log("INSTALADO");
+//alert("Hello! I am an alert box!!");
+console.log("INSTALADO sin chache");
 
 
 });
@@ -73,7 +73,7 @@ console.log(decodeURIComponent(pathToJson));
 let firebaseConfig = JSON.parse(decodeURIComponent(pathToJson));
 firebase.initializeApp(firebaseConfig); 
 const messaging =  firebase.messaging();
-console.log("ingreso registrando mensaje 2");
+console.log("ingreso registrando mensaje 2 en SW");
 
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js...] Received background message ', payload);
