@@ -77,7 +77,10 @@ console.log("ingreso registrando mensaje 2 en SW");
 
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js...] Received background message ', payload);
- // const notification = payload.data;
+ 
+	console.log('Prueba cambio', payload.image);
+	
+	// const notification = payload.data;
 
   //notification.titulo= "Alegra";
   //notification.mensaje= "Construye el Reino de Dios";
