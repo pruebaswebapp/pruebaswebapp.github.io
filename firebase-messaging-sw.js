@@ -90,10 +90,14 @@ messaging.onBackgroundMessage((payload) => {
   
 
   // Customize notification here
+	/*
 	self.registration.showNotification(notification.title, {
         body: notification.mensaje,
         icon: notification.image
-    });      
+    });   
+
+*/
+    
 });
 
 
