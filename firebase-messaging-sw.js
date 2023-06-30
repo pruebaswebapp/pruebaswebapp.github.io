@@ -80,7 +80,7 @@ messaging.onBackgroundMessage((payload) => {
 
 payload.notification.icon= "https://mariavguadalupe.github.io/Alegra512.png";
 	
-	console.log('Prueba cambio2', payload.notification.title);
+	console.log('Prueba icon, payload.notification.icon);
 	
 	// const notification = payload.data;
 
