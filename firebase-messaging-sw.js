@@ -17,6 +17,9 @@ self.addEventListener("install", (e) => {
 );
 
 */
+
+self.skipWaiting();
+
 });
 
 self.addEventListener("activate", (e) => {
@@ -73,12 +76,17 @@ firebase.initializeApp(firebaseConfig);
 const messaging =  firebase.messaging();
 console.log("ingreso registrando mensaje 2 en SW");
 
+console.log('messagin', messaging.notification.title);
+
+messaging.notification.icon= "https://mariavguadalupe.github.io/Alegra512.png";
+
+
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js...] Received background message ', payload);
 
-payload.notification.icon= "https://mariavguadalupe.github.io/Alegra512.png";
+
 	
-	console.log('Prueba icon, payload.notification.icon');
+	console.log('Prueba 56', payload.notification.title);
 	
 	// const notification = payload.data;
 
