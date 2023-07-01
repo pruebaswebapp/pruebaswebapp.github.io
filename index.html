@@ -173,120 +173,6 @@ var actionbardata = {"siteID":"219610288","siteURL":"http:\/\/alegra58.wordpress
 
 
 	
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-        var api = "https://script.google.com/macros/s/AKfycbw-I67dHQaMX-qv27H2H3jXT2qGJ2ngnKGqIcMcnomU7HYvy4CGVNryEubEoiv9FuzM/exec";
-        var firebaseConfig = {};
-		var vapidKey = "";
-	    let messaging;        
-		if ('serviceWorker' in navigator) {
-            console.log("ingreso");
-            // SE OBTIENE LOS DATOS 
-            $.ajax({
-                url: api,
-                jsonp: "callback",
-                method: 'POST',
-                data: JSON.stringify({ op: "parametria"}),
-                async: true,
-                success: function (respuesta) {
-                    if (respuesta.status == '0') {
-                        firebaseConfig = respuesta.firebaseConfig;
-                        vapidKey = respuesta.vapidKey;
-                        console.log("Se consulto parametria correctamente");
-                        suscribirse_push();
-                    } else {
-                        alert("No se suscribio");
-                    }
-                }
-            });
-        } else {
-            console.log('Service Worker not supported')
-        }
-        
-        async function suscribirse_push() {
-            await firebase.initializeApp(firebaseConfig);
-            messaging = await firebase.messaging();
-            const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js?config='+ encodeURIComponent(JSON.stringify(firebaseConfig)))
-//            const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js')
-			.catch((err) => { return console.log('[Service Worker] Registration Error:', err) })
-            console.log('[Service Worker] Registered.Scope:', serviceWorkerRegistration.scope);
-            await navigator.serviceWorker.ready;
-            await messaging.getToken({ vapidKey: vapidKey, serviceWorkerRegistration: serviceWorkerRegistration })
-                .then((currentToken) => {
-                    if (currentToken) {
-                        console.log('current token for client: ', currentToken);
-                        $.ajax({
-                            url: api,
-                            jsonp: "callback",
-                            method: 'POST',
-                            data: JSON.stringify({ op: "suscribirse", subscription: currentToken }),
-                            async: true,
-                            success: function (respuesta) {
-                                if (respuesta.status == '0') {
-                                    console.log("Se genero el token");
-                                } else {
-                                    alert("No se suscribio");
-                                }
-                            }
-                        });
-                        
-                    } else {
-                        console.log('No registration token available. Request permission to generate one.');
-                    }
-                }).catch((err) => {
-                    console.log('An error occurred while retrieving token. ', err);
-                });
-
-            await messaging.onMessage((payload) => {
-           	 console.log('[messaging.js...] Received  message ', payload);
-           	  const notification = payload.data;
-
-				 notification.titulo= "Alegra en HTML";
-  					notification.mensaje= "Manual 2";
-  					notification.imagen= "https://mariavguadalupe.github.io/Alegra512.png";
-
-
-
-           	  console.log('titulo 3', notification.titulo);
-           	  console.log('mensaje 3', notification.mensaje);
-           	  console.log('imagen 3', notification.imagen);
-           	     if (!("Notification" in window)) {
-           	    	 alert("This browser does not support desktop notification");
-   	      		 }else if (Notification.permission === "granted") {
-	      			 var notificacion= new Notification(notification.titulo, {
-   		      	        body: notification.mensaje,
-   		      	        icon: notification.imagen
-   		      	    });
-	    	      	 notification.onclick=function(ev){
-   	  	      	    	ev.preventDefault();    
-   	  	      	    	window.open(payload.notificacion.click_action,'_blank');
-   	  	      		notificacion.close();
-   	  	      		}
-   	      		 }else if (Notification.permission !== 'denied') {
-   	      		    Notification.requestPermission(function (permission) {
-   	      		    	if(!('permission' in Notification)) {
-   	      		        Notification.permission = permission;
-   	      		      }
-   	      		      if (permission === "granted") {
-   	  	      		    var notificacion= new Notification(notification.titulo, {
-   			      	        body: notification.mensaje,
-   			      	        icon: notification.imagen
-   			      	    });
-   	  	      			notification.onclick=function(ev){
-   		  	      	    	ev.preventDefault();    
-   		  	      	    	window.open(payload.notificacion.click_action,'_blank');
-   		  	      		notificacion.close();
-   		  	      		}
-   	      		      }
-   	      		    });
-   	      		  } else {
-   	      			  alert("Permission is "+Notification.permission);
-   	      		  }
-           });
-        }
-    </script>
 
 
 
@@ -383,7 +269,7 @@ var actionbardata = {"siteID":"219610288","siteURL":"http:\/\/alegra58.wordpress
 <div class="wp-site-blocks">
 <main class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
 <div class="wp-block-cover alignfull is-light" style="min-height:100vh"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
-<div class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained"><div class="aligncenter is-style-rounded wp-block-site-logo"><a href="https://pastoralsocialtexcoco.mx/" class="custom-logo-link" rel="home" aria-current="page"><img width="126" height="126" src="./caritas512.png" class="custom-logo" alt="Alegra" decoding="async" srcset="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=126&amp;h=126 126w, https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=150&amp;h=150 150w, https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg 157w" sizes="(max-width: 126px) 100vw, 126px" data-attachment-id="50" data-permalink="https://alegra58.wordpress.com/alegra512-2/" data-orig-file="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg" data-orig-size="157,157" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Alegra512" data-image-description="" data-image-caption="" data-medium-file="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=157" data-large-file="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=157" /></a></div>
+<div class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained"><div class="aligncenter is-style-rounded wp-block-site-logo"><a href="https://pastoralsocialtexcoco.mx/" class="custom-logo-link" rel="home" aria-current="page"><img width="126" height="126" src="/caritas512.png" class="custom-logo" alt="Alegra" decoding="async" srcset="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=126&amp;h=126 126w, https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=150&amp;h=150 150w, https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg 157w" sizes="(max-width: 126px) 100vw, 126px" data-attachment-id="50" data-permalink="https://alegra58.wordpress.com/alegra512-2/" data-orig-file="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg" data-orig-size="157,157" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Alegra512" data-image-description="" data-image-caption="" data-medium-file="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=157" data-large-file="https://alegra58.files.wordpress.com/2023/05/alegra512-edited.jpg?w=157" /></a></div>
 
 <h1 style="font-style:normal;font-weight:700;text-decoration:none;text-transform:capitalize;letter-spacing:0px;" class="has-text-align-center has-link-color has-text-color has-foreground-color wp-block-site-title has-x-large-font-size wp-elements-d1ddbd4d61efc99a3a8325e148d34dc7">Cáritas Alcohuacan </h1>
 
@@ -1016,13 +902,13 @@ if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
   <script>
-/*
+
   if('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js')
         .then(function() { console.log("Service worker registrado"); });
     }
 
-	  */
+	
 
 	  console.log("Service worker en espera de instalarse");
 
