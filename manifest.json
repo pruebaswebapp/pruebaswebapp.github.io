@@ -1,6 +1,6 @@
 {
-"name": "Alegra",
-"short_name": "Alegra",
+"name": "Cáritas Texcoco",
+"short_name": "Cáritas Texcoco",
 "teme_color": "#ffe88a",
 "backgroud_color": "#ffe88a",
 "display": "standalone",
@@ -12,7 +12,7 @@
 
 {  
 
-	"src": "/Alegra192.png",
+	"src": "/caritas192.png",
 	"type": "image/png",
 	"sizes": "192x192",
     "purpose": "any maskable"
@@ -20,7 +20,7 @@
 },
 {  
 
-	"src": "/Alegra512.png",
+	"src": "/caritas512.png",
 	"type": "image/png",
 	"sizes": "512x512",
     "purpose": "maskable"
@@ -28,7 +28,7 @@
 },
 {  
 
-	"src": "/Alegra180.png",
+	"src": "/caritas180.png",
 	"type": "image/png",
 	"sizes": "180x180",
     "purpose": "maskable"
