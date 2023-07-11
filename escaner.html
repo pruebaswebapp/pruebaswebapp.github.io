@@ -1,69 +1,84 @@
 <!DOCTYPE html>
-<html>
-    <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- JAVASCRIPT-->
-            <!-- Libreria jquery (3.3.1)-->
-            <script type="text/javascript" src="./js/libs/jquery/jquery.js"></script>
-            <!-- Librerias para el lector de códigos-->
-            <script type="text/javascript" src="./js/libs/jsqrcode/grid.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/version.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/detector.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/formatinf.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/errorlevel.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/bitmat.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/datablock.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/bmparser.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/datamask.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/rsdecoder.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/gf256poly.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/gf256.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/decoder.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/qrcode.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/findpat.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/alignpat.js"></script>
-            <script type="text/javascript" src="./js/libs/jsqrcode/databr.js"></script>
-            <!--Libreria jsQR-->
-            <script type="text/javascript" src="./js/libs/jsQR/jsQR.js"></script>
-            <!--Libreria bootstrap-->
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
-
-            <!--CSS-->
-            <!--Libreria bootstrap-->
-            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    </head>
-    <body>        
-        <div class="container">
-            <div class="alert alert-info">
-                <div class="row alert-heading">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10"><h2>Lector de c&oacute;digos QR</h2></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 form-group">
-                    <label class="label label-success">C&aacute;mara</label>
-                    <select class="form-control" id="VideoSource"></select>
-                </div>
-                <div class="col-md-4">
-                    <video id="VisorVideo" playsinline="true" controls autoplay style="height:180px; width:240px;"></video>
-                </div>
-                <div class="col-md-4">
-                    <canvas id="qr-canvas" width="240" height="180"></canvas>                    
-                </div>                
-            </div>
-        </div>
-        <div class="container alert alert-success">
-            <input type="text" id="TextBIDI" class="form-control">
-        </div>
-        <div class="container alert alert-warning">
-            <div class="alert-heading">LOG</div>
-            <div id="LineaLog">
-                
-            </div>
-        </div>
-    </body>
-    <!--Incluimos el js de la app-->
-    <script type="text/javascript" src="./js/app.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo 2</title>
+    <!-- <script type="text/javascript" src="js/instascan.js"></script> -->
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <style>
+        #preview {
+            width: 500px;
+            height: 500px;
+            margin: 0px auto;
+        }
+    </style>
+    <video id="preview"></video>
+    <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
+        <label class="btn btn-primary active">
+            <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" value="2" autocomplete="off"> Back Camera 1
+        </label>
+    <label class="btn btn-secondary">
+            <input type="radio" name="options" value="3" autocomplete="off"> Back Camera 2
+        </label>
+    </div>
+    <script type="text/javascript">
+        var scanner = new Instascan.Scanner({
+            video: document.getElementById('preview'),
+            scanPeriod: 5,
+            mirror: false
+        });
+        scanner.addListener('scan', function (content) {
+            alert(content);
+            //window.location.href=content;
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+        alert('Camaras: '+ cameras.length);
+                scanner.start(cameras[0]);
+                $('[name="options"]').on('change', function () {
+                    if ($(this).val() == 1) {
+                        if (cameras[0] != "") {
+                            scanner.start(cameras[0]);
+                        } else {
+                            alert('No Front camera found!');
+                        }
+                    } else if ($(this).val() == 2) {
+                        if (cameras[1] != "") {
+                            scanner.start(cameras[1]);
+                        } else {
+                            alert('No Back camera 1 found!');
+                        }
+                    } else if ($(this).val() == 3) {
+                        if (cameras[2] != "") {
+                            scanner.start(cameras[2]);
+                        } else {
+                            alert('No Back camera 2 found!');
+                        }
+                    }
+                });
+            } else {
+                console.error('No cameras found.');
+                alert('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+            alert(e);
+        });
+    </script>
+</body>
 </html>
