@@ -1,59 +1,25 @@
-
-const CACHE_NAME = "v1_cache_panel_adm",
-urlsToCache = [
-    "./manifest.json",
-];
-
-self.addEventListener("install", (e) => {
-/*e.waitUntil(
-  caches
-    .open(CACHE_NAME)
-    .then((cache) => {
-      return cache.addAll(urlsToCache).then(() => self.skipWaiting());
-    })
-    .catch((err) => "fallo el registro del cache ", err)
-);
-
-*/
-});
-
-self.addEventListener("activate", (e) => {
-/*const caheWitheList = [CACHE_NAME];
-
-e.waitUntil(
-  caches.keys().then((cachesNames) =>
-    cachesNames.map((cacheName) => {
-      if (cacheName.indexOf(cacheName) === -1) {
-        return caches.delete(cacheName);
-      }
-    })
-  )
-);
-*/
-alert("Hello! I am an alert box!!");
-console.log("INSTALADO");
-
-
-});
-
-self.addEventListener("fetch", (e) => {
-/*e.respondWith(
-  caches.match(e.request).then((res) => {
-    if (res) {
-      return res;
+var version = "v2.0.4";
+var swPath;
+var urlObject = new URL(location);
+var host;
+if (urlObject.searchParams.get("swPath")) {
+    swPath = urlObject.searchParams.get("swPath");
+}
+else {
+    if (urlObject.searchParams.get("version")) {
+        version = urlObject.searchParams.get("version");
     }
-    return fetch(e.request);
-  })
-);
-*/
-});
+    if (urlObject.searchParams.get("swJSHost")) {
+        host = "https://" + urlObject.searchParams.get("swJSHost");
+    }
 
 
 
-/*
-self.addEventListener("fetch", function(ev) {
 
-    ev.respondWith(fetch(ev.request));
-});
+    else {
+        host = "https://sdki.truepush.com/sdk/";
+    }
+    swPath = host + version + "/sw.js";
+}
+importScripts(swPath);
 
-*/
