@@ -2,6 +2,12 @@ var version = "v2.0.4";
 var swPath;
 var urlObject = new URL(location);
 var host;
+
+console.log(swPath);
+console.log(urlObject);
+
+console.log(host);
+
 if (urlObject.searchParams.get("swPath")) {
     swPath = urlObject.searchParams.get("swPath");
 }
@@ -21,5 +27,11 @@ else {
     }
     swPath = host + version + "/sw.js";
 }
+
+console.log(swPath);
+console.log(urlObject);
+
+console.log(host);
+
 importScripts(swPath);
 
